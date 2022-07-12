@@ -3,20 +3,31 @@
   "packageManager": "pnpm@7.4.0",
   "scripts": {
     "build": "vite build",
-    "dev": "vite --port 3333 --open",
+    "dev": "vite --open",
     "lint": "eslint .",
     "typecheck": "vue-tsc --noEmit",
     "preview": "vite preview",
     "test": "vitest"
   },
   "dependencies": {
+    "@trpc/client": "^9.25.3",
+    "@trpc/server": "^9.25.3",
     "@vueuse/core": "^8.7.5",
+    "cors": "^2.8.5",
+    "events": "^3.3.0",
+    "express": "^4.18.1",
+    "remove": "^0.1.5",
+    "ts-node-dev": "^2.0.0",
+    "url": "^0.11.0",
     "vue": "^3.2.37",
-    "vue-router": "^4.0.16"
+    "vue-router": "^4.0.16",
+    "zod": "^3.17.3"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.25.2",
     "@iconify-json/carbon": "^1.1.6",
+    "@types/cors": "^2.8.12",
+    "@types/express": "^4.17.13",
     "@types/node": "^18.0.0",
     "@unocss/reset": "^0.42.0",
     "@vitejs/plugin-vue": "^2.3.3",
@@ -29,6 +40,7 @@
     "unplugin-auto-import": "^0.9.2",
     "unplugin-vue-components": "^0.20.1",
     "vite": "^2.9.13",
+    "vite-plugin-node": "^1.0.0",
     "vite-plugin-pages": "^0.25.0",
     "vitest": "^0.16.0",
     "vue-tsc": "^0.38.2"
