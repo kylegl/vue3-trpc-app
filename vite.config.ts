@@ -66,7 +66,7 @@ export default defineConfig(({ command, mode }) => {
         exportName: 'viteNodeApp',
         tsCompiler: 'esbuild',
         adapter({ app, req, res, next }) {
-          if (req.url?.startsWith('/api'))
+          if (req.url?.startsWith('/trpc'))
             app(req, res)
 
           else

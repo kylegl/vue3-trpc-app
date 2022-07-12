@@ -1,11 +1,14 @@
 <script setup lang="ts">
+import { testAPI } from '~/composables/trpcClient'
+
 const name = $ref('')
 
 const router = useRouter()
 const go = () => {
-  if (name)
-    router.push(`/hi/${encodeURIComponent(name)}`)
+  testAPI()
 }
+
+// const apiTest = useFetch('/api')
 </script>
 
 <template>
@@ -40,7 +43,6 @@ const go = () => {
     <div>
       <button
         class="m-3 text-sm btn"
-        :disabled="!name"
         @click="go"
       >
         Go
