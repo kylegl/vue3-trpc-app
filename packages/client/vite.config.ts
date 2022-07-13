@@ -1,6 +1,6 @@
 /// <reference types="vitest" />
-import path from 'path'
 
+import path from 'path'
 import { defineConfig } from 'vite'
 import Vue from '@vitejs/plugin-vue'
 import Pages from 'vite-plugin-pages'
@@ -45,8 +45,9 @@ export default defineConfig({
     // https://github.com/antfu/unocss
     // see unocss.config.ts for config
     Unocss(),
-    // https://github.com/vitest-dev/vitest
   ],
+
+  // https://github.com/vitest-dev/vitest
   test: {
     environment: 'jsdom',
   },

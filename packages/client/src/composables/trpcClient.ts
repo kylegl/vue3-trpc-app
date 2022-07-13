@@ -3,23 +3,19 @@ import { httpBatchLink } from '@trpc/client/links/httpBatchLink'
 import { loggerLink } from '@trpc/client/links/loggerLink'
 import type { AppRouter } from '../../../server/core/src/index'
 
-// polyfill
 
 const sleep = (ms = 100) => new Promise(resolve => setTimeout(resolve, ms))
 
-const url = 'http://localhost:3000/trpc'
+const url = 'http://localhost:2022/trpc'
 
 export const client = createTRPCClient<AppRouter>({
   links: [
     loggerLink(),
-    httpBatchLink({ url }),
+    httpBatchLink({
+      maxBatchSize: 10,
+      url,
+    }),
   ],
-  fetch(url, options) {
-    return fetch(url, {
-      ...options,
-      credentials: 'include',
-    })
-  },
 })
 
 export const testAPI = async () => {

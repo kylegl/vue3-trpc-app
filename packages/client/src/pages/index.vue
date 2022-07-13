@@ -6,8 +6,7 @@ const name = $ref('')
 const router = useRouter()
 const go = async () => {
   // const { data } = useFetch('http://localhost:2022/trpc/hello')
-  const data = await client.query('hello')
-  console.log('res', data)
+  testAPI()
 }
 
 // const apiTest = useFetch('/api')
@@ -47,7 +46,7 @@ const go = async () => {
         class="m-3 text-sm btn"
         @click="go"
       >
-        Go hom
+        Go home
       </button>
     </div>
   </div>

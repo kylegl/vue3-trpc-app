@@ -12,7 +12,6 @@
     "resolveJsonModule": true,
     "noUnusedLocals": true,
     "strictNullChecks": true,
-    "alwaysStrict": true,
     "allowJs": true,
     "forceConsistentCasingInFileNames": true,
     "types": [
