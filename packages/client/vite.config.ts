@@ -1,6 +1,5 @@
 /// <reference types="vitest" />
 import path from 'path'
-import { VitePluginNode } from 'vite-plugin-node'
 
 import { defineConfig } from 'vite'
 import Vue from '@vitejs/plugin-vue'
@@ -53,23 +52,6 @@ export default defineConfig({
     // see unocss.config.ts for config
     Unocss(),
     // https://github.com/vitest-dev/vitest
-
-    ...VitePluginNode({
-      // REFERENCE:  https://github.com/axe-me/vite-plugin-node/issues/47
-
-      // Nodejs native Request adapter
-      // tell the plugin where is your project entry
-      appPath: './src/server/trpc/index.ts',
-      exportName: 'viteNodeApp',
-      tsCompiler: 'esbuild',
-      adapter({ app, req, res, next }) {
-        if (req.url.startsWith('/trpc/'))
-          app(req, res)
-
-        else
-          next()
-      },
-    }),
   ],
   test: {
     environment: 'jsdom',

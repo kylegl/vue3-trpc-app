@@ -1,15 +1,15 @@
 import { createTRPCClient } from '@trpc/client'
 import { httpBatchLink } from '@trpc/client/links/httpBatchLink'
 import { loggerLink } from '@trpc/client/links/loggerLink'
-import type { AppRouter } from '~/server/trpc/'
+import type { AppRouter } from '../../../server/core/src/index'
 
 // polyfill
 
 const sleep = (ms = 100) => new Promise(resolve => setTimeout(resolve, ms))
 
-const url = 'http://localhost:3000/trpc'
+const url = 'http://localhost:2021/trpc'
 
-export const client = createTRPCClient<AppRouter>({
+const client = createTRPCClient<AppRouter>({
   links: [
     () =>
       ({ op, prev, next }) => {
@@ -64,4 +64,3 @@ export const testAPI = async () => {
 
   console.log('👌 should be a clean exit if everything is working right')
 }
-

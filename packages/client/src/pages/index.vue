@@ -5,7 +5,7 @@ const name = $ref('')
 
 const router = useRouter()
 const go = () => {
-  client.query('hello', 'client')
+  testAPI()
 }
 
 // const apiTest = useFetch('/api')
@@ -45,7 +45,7 @@ const go = () => {
         class="m-3 text-sm btn"
         @click="go"
       >
-        Go
+        Go ho
       </button>
     </div>
   </div>
