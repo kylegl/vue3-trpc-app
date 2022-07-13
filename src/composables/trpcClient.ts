@@ -7,7 +7,7 @@ import type { AppRouter } from '~/server/trpc/'
 
 const sleep = (ms = 100) => new Promise(resolve => setTimeout(resolve, ms))
 
-const url = 'http://localhost:4000/trpc'
+const url = 'http://localhost:3000/trpc'
 
 export const client = createTRPCClient<AppRouter>({
   links: [

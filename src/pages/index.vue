@@ -5,7 +5,7 @@ const name = $ref('')
 
 const router = useRouter()
 const go = () => {
-  testAPI()
+  client.query('hello', 'client')
 }
 
 // const apiTest = useFetch('/api')
