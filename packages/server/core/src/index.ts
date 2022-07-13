@@ -4,6 +4,7 @@ import * as trpcExpress from '@trpc/server/adapters/express';
 import { EventEmitter } from 'events';
 import express from 'express';
 import { z } from 'zod';
+import cors from 'cors';
 
 const createContext = ({
   req,
@@ -119,10 +120,12 @@ export type AppRouter = typeof appRouter;
 
   // express implementation
   const app = express();
+  app.use(cors());
 
   app.use((req, _res, next) => {
     // request logger
     console.log('⬅️ ', req.method, req.path, req.body ?? req.query);
+    _res.header('Access-Control-Allow-Origin', '*');
 
     next();
   });
@@ -136,5 +139,5 @@ export type AppRouter = typeof appRouter;
   );
   app.get('/', (_req, res) => res.send('hello'));
   app.listen(2022, () => {
-    console.log('listening on port 2021');
+    console.log('listening on port 2022');
   });

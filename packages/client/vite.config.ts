@@ -9,12 +9,6 @@ import AutoImport from 'unplugin-auto-import/vite'
 import Unocss from 'unocss/vite'
 
 export default defineConfig({
-  server: {
-    hmr: true,
-    watch: {
-      usePolling: true,
-    },
-  },
   resolve: {
     alias: {
       '~/': `${path.resolve(__dirname, 'src')}/`,

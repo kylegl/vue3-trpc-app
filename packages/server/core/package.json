@@ -15,6 +15,7 @@
   "license": "ISC",
   "dependencies": {
     "@trpc/server": "^9.25.3",
+    "cors": "^2.8.5",
     "events": "^3.3.0",
     "express": "^4.18.1",
     "zod": "^3.17.3"

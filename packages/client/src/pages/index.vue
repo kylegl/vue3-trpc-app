@@ -4,8 +4,10 @@ import { testAPI } from '~/composables/trpcClient'
 const name = $ref('')
 
 const router = useRouter()
-const go = () => {
-  testAPI()
+const go = async () => {
+  // const { data } = useFetch('http://localhost:2022/trpc/hello')
+  const data = await client.query('hello')
+  console.log('res', data)
 }
 
 // const apiTest = useFetch('/api')
@@ -45,7 +47,7 @@ const go = () => {
         class="m-3 text-sm btn"
         @click="go"
       >
-        Go ho
+        Go hom
       </button>
     </div>
   </div>

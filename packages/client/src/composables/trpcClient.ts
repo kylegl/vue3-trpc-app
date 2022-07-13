@@ -7,21 +7,19 @@ import type { AppRouter } from '../../../server/core/src/index'
 
 const sleep = (ms = 100) => new Promise(resolve => setTimeout(resolve, ms))
 
-const url = 'http://localhost:2021/trpc'
+const url = 'http://localhost:3000/trpc'
 
-const client = createTRPCClient<AppRouter>({
+export const client = createTRPCClient<AppRouter>({
   links: [
-    () =>
-      ({ op, prev, next }) => {
-        console.log('->', op.type, op.path, op.input)
-
-        return next(op, (result) => {
-          console.log('<-', op.type, op.path, op.input, ':', result)
-          prev(result)
-        })
-      },
+    loggerLink(),
     httpBatchLink({ url }),
   ],
+  fetch(url, options) {
+    return fetch(url, {
+      ...options,
+      credentials: 'include',
+    })
+  },
 })
 
 export const testAPI = async () => {
