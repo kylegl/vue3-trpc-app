@@ -16,39 +16,16 @@ var __copyProps = (to, from, except, desc) => {
   return to;
 };
 var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var createContext_exports = {};
-__export(createContext_exports, {
-  createContext: () => createContext
+var constants_exports = {};
+__export(constants_exports, {
+  baseUrl: () => baseUrl,
+  endpoint: () => endpoint
 });
-module.exports = __toCommonJS(createContext_exports);
-var import_prisma = require("../prisma/prisma");
-var import_jwt = require("../utils/jwt");
-const getUserFromReq = (req) => {
-  const authHeader = req.headers.authorization;
-  const token = authHeader && authHeader.split(" ")[1];
-  if (token) {
-    try {
-      const verified = (0, import_jwt.verifyJwt)(token);
-      return verified;
-    } catch (e) {
-      return null;
-    }
-  }
-  return null;
-};
-function createContext({
-  req,
-  res
-}) {
-  const user = getUserFromReq(req);
-  return {
-    req,
-    res,
-    prisma: import_prisma.prisma,
-    user
-  };
-}
+module.exports = __toCommonJS(constants_exports);
+const baseUrl = "http://localhost:3000";
+const endpoint = "/trpc";
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
-  createContext
+  baseUrl,
+  endpoint
 });

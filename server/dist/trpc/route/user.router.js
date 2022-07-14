@@ -48,6 +48,11 @@ var import_runtime = require("@prisma/client/runtime");
 var trpc = __toESM(require("@trpc/server"));
 var import_createRouter = require("../createRouter");
 var import_user = require("../../schema/user.schema");
+var import_mailer = require("../../utils/mailer");
+var import_base64 = require("../../utils/base64");
+var import_jwt = require("../../utils/jwt");
+var import_constants = require("../../constants");
+var import_cookie = require("cookie");
 const userRouter = (0, import_createRouter.createRouter)().mutation("register-user", {
   input: import_user.createUserSchema,
   resolve(_0) {
@@ -76,6 +81,77 @@ const userRouter = (0, import_createRouter.createRouter)().mutation("register-us
         });
       }
     });
+  }
+}).mutation("request-otp", {
+  input: import_user.requestOtpSchema,
+  resolve(_0) {
+    return __async(this, arguments, function* ({ ctx, input }) {
+      const { email, redirect } = input;
+      const user = yield ctx.prisma.user.findUnique({
+        where: {
+          email
+        }
+      });
+      if (!user) {
+        throw new trpc.TRPCError({
+          code: "NOT_FOUND",
+          message: "User not found"
+        });
+      }
+      const token = yield ctx.prisma.loginToken.create({
+        data: {
+          redirect,
+          user: {
+            connect: {
+              id: user.id
+            }
+          }
+        }
+      });
+      yield (0, import_mailer.sendLoginEmail)({
+        email: user.email,
+        url: import_constants.baseUrl,
+        token: (0, import_base64.encode)(`${token.id}:${user.email}`)
+      });
+      return true;
+    });
+  }
+}).query("verify-otp", {
+  input: import_user.verifyOtpSchema,
+  resolve(_0) {
+    return __async(this, arguments, function* ({ ctx, input }) {
+      const decoded = (0, import_base64.decode)(input.hash);
+      const [id, email] = decoded.split(":");
+      const token = yield ctx.prisma.loginToken.findFirst({
+        where: {
+          id,
+          user: {
+            email
+          }
+        },
+        include: {
+          user: true
+        }
+      });
+      if (!token) {
+        throw new trpc.TRPCError({
+          code: "FORBIDDEN",
+          message: "Invalid token"
+        });
+      }
+      const jwt = (0, import_jwt.signJwt)({
+        email: token.user.email,
+        id: token.user.id
+      });
+      ctx.res.setHeader("Set-Cookie", (0, import_cookie.serialize)("token", jwt, { path: "/" }));
+      return {
+        redirect: token.redirect
+      };
+    });
+  }
+}).query("me", {
+  resolve({ ctx }) {
+    return ctx.user;
   }
 }).query("get-users", {
   resolve: (_0) => __async(void 0, [_0], function* ({ ctx }) {
