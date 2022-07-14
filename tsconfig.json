@@ -3,10 +3,13 @@
   "files": [],
   "references": [
       {
-          "path": "packages/client/tsconfig.json"
+          "path": "client/tsconfig.json"
       },
       {
-          "path": "packages/server/core/tsconfig.json"
+          "path": "server/core/tsconfig.json"
       },
+      {
+          "path": "server/prisma/tsconfig.json"
+      }
   ]
 }

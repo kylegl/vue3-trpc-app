@@ -2,7 +2,6 @@
   "name": "vue3-trpc-app",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
   "scripts": {
     "build:": "tsc --build tsconfig.json",
     "dev:server": "pnpm --filter server dev",

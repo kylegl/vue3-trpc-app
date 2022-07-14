@@ -1,13 +1,12 @@
 {
-  "extends": "../../../tsconfig.server.json",
+  "extends": "../../tsconfig.server.json",
   "compilerOptions": {
     "outDir": "dist",
     "rootDir": "src",
-    "composite": true
   },
   "references": [],
   "include": [
-    "src"
+    "src/prisma.ts"  
   ],
   "exclude": [
     "node_modules",
