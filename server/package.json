@@ -1,9 +1,9 @@
 {
-  "name": "@kylegl/server",
+  "name": "server",
   "private": true,
   "version": "1.0.0",
   "description": "",
-  "main": "dist/index.js",
+  "main": "src/index.ts",
   "typings": "dist/index.d.ts",
   "scripts": {
     "dev": "nodemon",
@@ -14,11 +14,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@kylegl/prisma": "workspace:*",
+    "@prisma/client": "^4.0.0",
     "@trpc/server": "^9.25.3",
     "cors": "^2.8.5",
     "events": "^3.3.0",
     "express": "^4.18.1",
+    "superjson": "^1.9.1",
     "zod": "^3.17.3"
   },
   "devDependencies": {

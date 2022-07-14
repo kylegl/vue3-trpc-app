@@ -1,19 +1,27 @@
 <script setup lang="ts">
 import { testAPI } from '~/composables/trpcClient'
 
-const name = $ref('')
+const name = $ref('Kyle')
+const email = $ref('test@t.com')
+let res = $ref('')
 
 const router = useRouter()
 const go = async () => {
   // const { data } = useFetch('http://localhost:2022/trpc/hello')
-  testAPI()
-}
+//   const newUser = await client.mutation('users.register-user', {
+//     name,
+//     email})
 
-// const apiTest = useFetch('/api')
+  //   console.log('newUser', newUser)
+  // }
+
+  res = await client.query('users.get-users')
+}
 </script>
 
 <template>
   <div>
+    {{res}}
     <div i-carbon-campsite text-4xl inline-block />
     <p>
       <a rel="noreferrer" href="https://github.com/antfu/vitesse-lite" target="_blank">
