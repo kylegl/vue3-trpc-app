@@ -1,5 +1,3 @@
-import { PrismaClientKnownRequestError } from '@prisma/client/runtime'
-import * as trpc from '@trpc/server'
 import { createRouter } from '../createRouter'
 import { createUserSchema, requestOtpSchema, verifyOtpSchema } from '../../schema/user.schema'
 import { sendLoginEmail } from '../../utils/mailer'
@@ -7,6 +5,8 @@ import { encode, decode } from '../../utils/base64'
 import { signJwt } from '../../utils/jwt'
 import { baseUrl } from '../../constants'
 import { serialize } from 'cookie'
+import * as trpc from '@trpc/server'
+import { routeErrorHandler } from '../utils'
 
 
 export const userRouter = createRouter()
@@ -27,19 +27,8 @@ export const userRouter = createRouter()
         return user
       }
       catch (err) {
-        if (err instanceof PrismaClientKnownRequestError) {
-          if (err.code === 'P2002') {
-            throw new trpc.TRPCError({
-              code: 'CONFLICT',
-              message: 'User already exists',
-            })
-          }
-        }
-
-        throw new trpc.TRPCError({
-          code: 'INTERNAL_SERVER_ERROR',
-          message: 'Do you smell smoke?',
-        })
+        const error = routeErrorHandler(err, 'CONFLICT', 'User already exists')
+        throw error
       }
     },
   })

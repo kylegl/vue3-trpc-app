@@ -11,7 +11,7 @@ datasource db {
 }
 
 model User {
-  id    String @unique @default(uuid())
+  id    String @unique @default(cuid())
   email String @unique
   name  String
 
@@ -21,10 +21,36 @@ model User {
 }
 
 model LoginToken {
-  id        String   @unique @default(uuid())
-  user      User     @relation(fields: [userId], references: [id])
-  userId    String
-  
+  id     String @unique @default(cuid())
+  user   User   @relation(fields: [userId], references: [id])
+  userId String
+
   createdAt DateTime @default(now())
   redirect  String   @default("/")
+}
+
+model Client {
+  id    String  @unique @default(cuid())
+  name  String  @unique 
+  email String?
+  phone String?
+  address String?
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  Contact   Contact[]
+}
+
+model Contact {
+  id       String @unique @default(cuid())
+  client   Client @relation(fields: [clientId], references: [id])
+  clientId String
+  role     String?
+
+  name  String
+  email String?
+  phone String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }

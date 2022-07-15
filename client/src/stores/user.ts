@@ -1,6 +1,5 @@
 import { acceptHMRUpdate, defineStore } from 'pinia'
-import type { inferProcedureOutput } from '@trpc/server'
-import type { AppRouter } from '../../../server/src/trpc/route/app.router'
+import type { CtxUser, InferQueryOutput } from '~/types'
 
 export const useUserStore = defineStore('userStore', () => {
   const storedUser = getStoredUser()
@@ -31,10 +30,10 @@ export const useUserStore = defineStore('userStore', () => {
   }
 
   async function setUser() {
-    const { data } = await client.query('users.me')
+    const user = await client.query('users.me')
 
-    if (data.value)
-      setStoredUser(data.value)
+    if (user)
+      setStoredUser(user)
   }
 
   function getStoredUser(): CtxUser | null {
@@ -56,18 +55,3 @@ export const useUserStore = defineStore('userStore', () => {
 
 if (import.meta.hot)
   import.meta.hot.accept(acceptHMRUpdate(useUserStore, import.meta.hot))
-
-export interface CtxUser {
-  id: string
-  email: string
-  name: string
-  iat: string
-  exp: number
-}
-
-type TQuery = keyof AppRouter['_def']['queries']
-
-type InferQueryOutput<TRouteKey extends TQuery> = inferProcedureOutput<
-  AppRouter['_def']['queries'][TRouteKey]
->
-

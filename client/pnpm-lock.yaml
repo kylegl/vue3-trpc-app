@@ -35,6 +35,7 @@ specifiers:
   vitest: ^0.16.0
   vue: ^3.2.37
   vue-router: ^4.0.16
+  vue-select: 4.0.0-beta.3
   vue-tsc: ^0.38.2
   zod: ^3.17.3
 
@@ -76,6 +77,7 @@ devDependencies:
   vite-plugin-pages: 0.25.0_vite@2.9.14
   vite-plugin-vue-layouts: 0.6.0_flmdgpcga2tcv7fjnxu4mi6p6a
   vitest: 0.16.0_jsdom@20.0.0
+  vue-select: 4.0.0-beta.3_vue@3.2.37
   vue-tsc: 0.38.5_typescript@4.7.4
 
 packages:
@@ -4604,6 +4606,14 @@ packages:
     dependencies:
       '@vue/devtools-api': 6.2.1
       vue: 3.2.37
+
+  /vue-select/4.0.0-beta.3_vue@3.2.37:
+    resolution: {integrity: sha512-sXufbTDluz26a39UUZE9jeh9Hojnn8zr9qDDUlVEBc7E0F+h3+Nzy8YzyFHuVNrrYLmK0zrPkb7hWFulAEW41Q==}
+    peerDependencies:
+      vue: 3.x
+    dependencies:
+      vue: 3.2.37
+    dev: true
 
   /vue-tsc/0.38.5_typescript@4.7.4:
     resolution: {integrity: sha512-AFlqvwpENOTTJxS1Gl1uG0ZVsvtGCbgv9d0i4fXk5Pnao/ETVwWewPEsj+4cPlwa5htO9WhK6qfWwoqcCqg0yQ==}
