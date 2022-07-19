@@ -11,7 +11,7 @@ const customer = $ref({
   address: undefined,
 })
 
-let customers: InferQueryOutput<'clients.get-clients'> = []
+const customers: InferQueryOutput<'clients.get-clients'> = $ref([])
 
 const createClient = () => {
   client.mutation('clients.create-client', {
@@ -21,10 +21,11 @@ const createClient = () => {
     address: customer.address,
   })
 }
+const { data, error } = useQuery(['clients.get-clients'])
 
-const getClients = async () => {
-  const res = await client.query('clients.get-clients')
-  customers = res
+const getClients = () => {
+  
+  // customers = [...customers, ...res]
 }
 
 const contact = $ref({
@@ -35,7 +36,7 @@ const contact = $ref({
   role: undefined,
 })
 
-let contacts: InferQueryOutput<'contacts.get-contacts'> = []
+let contacts: InferQueryOutput<'contacts.get-contacts'> = $ref([])
 
 const createContact = () => {
   client.mutation('contacts.create-contact', {

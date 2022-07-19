@@ -55,3 +55,6 @@ export const useUserStore = defineStore('userStore', () => {
 
 if (import.meta.hot)
   import.meta.hot.accept(acceptHMRUpdate(useUserStore, import.meta.hot))
+
+
+// try out adding the client into vue-query
