@@ -3,8 +3,6 @@
   "private": true,
   "version": "1.0.0",
   "description": "",
-  "main": "src/index.ts",
-  "typings": "dist/index.d.ts",
   "scripts": {
     "dev": "nodemon",
     "build": "etsc",
